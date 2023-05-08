@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 //packages
 import axios from "axios";
+import useDebounce from "../hooks/useDebounce";
 
 //creating MovieContext
 export const MovieContext = createContext();
@@ -31,9 +32,7 @@ export const MovieProvider = ({ children }) => {
         }
     };
 
-    useEffect(() => {
-        fetchMovies();
-    }, [searchedWord]);
+    useDebounce(fetchMovies, searchedWord);
 
     //setting default value for search inorder to get movies eventhough searchquery is empty
     useEffect(() => {

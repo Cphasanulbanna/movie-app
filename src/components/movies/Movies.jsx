@@ -3,8 +3,11 @@ import React, { useContext } from "react";
 //css
 import "./movies.css";
 
+//components
 import SearchBar from "../search-bar/SearchBar";
 import MoviesList from "../movies-list/moviesList";
+
+//mode context
 import { modeContext } from "../../context/ModeContext";
 
 function Movies() {

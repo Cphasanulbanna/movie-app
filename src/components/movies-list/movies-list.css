@@ -13,6 +13,7 @@
 }
 
 .movie-list-box .movie {
+    background-color: #bdb7b7;
     width: 160px;
     height: 240px;
 }
