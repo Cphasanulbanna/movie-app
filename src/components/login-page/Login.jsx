@@ -5,6 +5,8 @@ import "./login.css";
 
 //packages
 import { useLocation, useNavigate } from "react-router-dom";
+
+//mode context
 import { ModeContext } from "../../context/ModeContext";
 
 function Login() {
@@ -23,7 +25,6 @@ function Login() {
     const userData = localStorage.getItem("user_data");
 
     const { whiteMode } = useContext(ModeContext);
-    console.log(whiteMode, "mode");
 
     //storing name
     const handleNameChange = (e) => {

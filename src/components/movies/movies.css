@@ -8,8 +8,6 @@
     padding-top: 30px;
 }
 .main-container.white-mode {
-    /* background: var(--light-overlay-secondary); */
-    /* background: var(--white); */
     background: var(--light-white);
 }
 

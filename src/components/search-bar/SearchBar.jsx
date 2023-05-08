@@ -19,7 +19,6 @@ function SearchBar() {
     return (
         <div className={`search-container ${whiteMode && "white-mode"}`}>
             <input
-                className={whiteMode && "white-mode"}
                 type="text"
                 placeholder="search movies...!"
                 onChange={handleInputChange}
