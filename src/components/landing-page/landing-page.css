@@ -1,0 +1,12 @@
+#landing-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-image: url("../../assets//images//movie-bg.png");
+}
+
+#landing-page .gallery {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
