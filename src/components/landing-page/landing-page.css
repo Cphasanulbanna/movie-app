@@ -6,7 +6,8 @@
     background-image: url("../../assets//images//movie-bg.png");
 }
 
-#landing-page .gallery {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+@media all and (max-width: 480px) {
+    #landing-page {
+        overflow-y: hidden;
+    }
 }

@@ -132,7 +132,10 @@ function Login() {
                             className={whiteMode && "white-mode"}
                         />
 
-                        <button type="submit">
+                        <button
+                            className={whiteMode && "white-mode"}
+                            type="submit"
+                        >
                             Sign In
                             <p className="error">{errorMsg}</p>
                         </button>

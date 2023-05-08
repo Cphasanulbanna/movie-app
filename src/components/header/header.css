@@ -3,7 +3,6 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 25px 50px;
-    background: transparent;
 }
 
 header .logo-box {
@@ -72,4 +71,38 @@ header .right .logout .profile {
     margin-left: 10px;
     width: 20px;
     height: 20px;
+}
+
+@media all and (max-width: 480px) {
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 5;
+        background: var(--dark-overlay);
+        padding: 30px;
+    }
+    header.white-mode {
+        background: var(--light-white);
+    }
+    header .logo-box .logo-image {
+        width: 36px;
+        height: 36px;
+    }
+    header .logo-box .logo-text {
+        display: none;
+    }
+    header .right button.logout span.text {
+        display: none;
+    }
+    header .right button.logout {
+        padding: 0;
+        height: unset;
+        outline: none;
+    }
+    header .right button.logout span.profile {
+        margin-left: 0;
+        width: 40px;
+        height: 40px;
+    }
 }

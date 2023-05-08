@@ -54,6 +54,9 @@
     border: 0;
     position: relative;
 }
+.login-container .content .top form button.white-mode {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 
 .login-container .content .top form input {
     background-color: var(--dark-grey);
@@ -67,6 +70,7 @@
 .login-container .content .top form input.white-mode {
     background-color: var(--dark-overlay-secondary);
     color: var(--dark-grey);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .login-container .content .top form input:last-child {
@@ -110,4 +114,17 @@
     z-index: 2;
     left: 0;
     bottom: 70px;
+}
+
+@media all and (max-width: 480px) {
+    .login-container {
+        height: calc(100vh - 110px);
+        position: absolute;
+        top: 110px;
+        padding: 50px 25px;
+        border-radius: 0;
+    }
+    .login-container .content .top h1 {
+        font-size: 24px;
+    }
 }

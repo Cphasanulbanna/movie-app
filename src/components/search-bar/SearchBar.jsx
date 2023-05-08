@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 //css
 import "./search-bar.css";
 
-//movie context
+// contexts
 import { MovieContext } from "../../context/MovieContext";
 import { ModeContext } from "../../context/ModeContext";
 

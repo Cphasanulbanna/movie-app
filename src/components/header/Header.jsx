@@ -35,7 +35,7 @@ function Header() {
     const userData = localStorage.getItem("user_data");
 
     return (
-        <header>
+        <header className={whiteMode && "white-mode"}>
             <div className="logo-box">
                 <div className="logo-image">
                     <img
@@ -57,18 +57,20 @@ function Header() {
                     />
                 </div>
                 {userData && (
-                    <button
-                        onClick={logout}
-                        className={`logout ${whiteMode && "white-mode"}`}
-                    >
-                        <span className={whiteMode && "white-mode"}>Logout</span>
-                        <span className="profile">
-                            <img
-                                src={whiteMode ? profileBlack : profileWhite}
-                                alt="profile"
-                            />
-                        </span>
-                    </button>
+                    <>
+                        <button
+                            onClick={logout}
+                            className={`logout ${whiteMode && "white-mode"}`}
+                        >
+                            <span className={`text ${whiteMode && "white-mode"}`}>Logout</span>
+                            <span className="profile">
+                                <img
+                                    src={whiteMode ? profileBlack : profileWhite}
+                                    alt="profile"
+                                />
+                            </span>
+                        </button>
+                    </>
                 )}
             </div>
         </header>

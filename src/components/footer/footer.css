@@ -82,3 +82,31 @@ footer .wrapper ul li.first .language-box .language {
 footer .wrapper ul li.first .language-box .down-arrow {
     cursor: pointer;
 }
+
+@media all and (max-width: 980px) {
+    footer .wrapper {
+        width: 85%;
+    }
+}
+
+@media all and (max-width: 680px) {
+    footer .wrapper ul {
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+    footer .wrapper ul li {
+        width: 45%;
+    }
+    footer .wrapper ul li.icons {
+        order: 3;
+    }
+    footer .wrapper ul li.third {
+        order: 4;
+    }
+}
+
+@media all and (max-width: 480px) {
+    footer .wrapper {
+        padding: 30px 10px;
+    }
+}

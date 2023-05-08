@@ -1,15 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 
 //css
 import "./footer.css";
 
 //mode context
 import { ModeContext } from "../../context/ModeContext";
+import { useLocation } from "react-router-dom";
 
 function Footer() {
     const { whiteMode } = useContext(ModeContext);
+    const location = useLocation();
+    const footerRef = useRef(null);
+
+    useEffect(() => {
+        if (window.innerWidth < 480) {
+            if (location.pathname === "/login") {
+                if (footerRef.current) {
+                    footerRef.current.style.display = "none";
+                }
+            }
+        }
+    }, [location.pathname]);
     return (
-        <footer className={whiteMode && "white-mode"}>
+        <footer
+            ref={footerRef}
+            className={whiteMode && "white-mode"}
+        >
             <div className="wrapper">
                 <h2>Questions? Call 1-844-505-2993</h2>
                 <ul>
