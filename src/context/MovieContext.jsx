@@ -32,7 +32,7 @@ export const MovieProvider = ({ children }) => {
         }
     };
 
-    useDebounce(fetchMovies, searchedWord);
+    useDebounce(fetchMovies, [searchedWord]);
 
     //setting default value for search inorder to get movies eventhough searchquery is empty
     useEffect(() => {

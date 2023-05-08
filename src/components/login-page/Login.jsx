@@ -7,9 +7,11 @@ import "./login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function Login() {
-    //states
+    //input states
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+
+    //error-message state
     const [errorMsg, setErrorMsg] = useState("");
 
     const navigate = useNavigate();

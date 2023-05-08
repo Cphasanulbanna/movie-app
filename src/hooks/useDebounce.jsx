@@ -8,7 +8,7 @@ function useDebounce(incomingFunction, dependency) {
         return () => {
             clearTimeout(debounceTheFunction);
         };
-    }, [dependency]);
+    }, [...dependency]);
 }
 
 export default useDebounce;
