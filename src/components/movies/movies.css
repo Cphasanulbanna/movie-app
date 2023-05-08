@@ -5,10 +5,12 @@
     margin: 0 auto;
     min-height: 100vh;
     max-width: 1200px;
+    padding-top: 30px;
 }
 .main-container.white-mode {
     /* background: var(--light-overlay-secondary); */
     /* background: var(--white); */
+    background: var(--light-white);
 }
 
 .main-container .container {

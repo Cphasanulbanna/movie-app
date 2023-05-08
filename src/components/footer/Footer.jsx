@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 
 //css
 import "./footer.css";
 
+//mode context
+import { ModeContext } from "../../context/ModeContext";
+
 function Footer() {
+    const { whiteMode } = useContext(ModeContext);
     return (
-        <footer>
+        <footer className={whiteMode && "white-mode"}>
             <div className="wrapper">
                 <h2>Questions? Call 1-844-505-2993</h2>
                 <ul>

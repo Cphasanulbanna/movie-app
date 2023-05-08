@@ -5,19 +5,19 @@ import "./movies-list.css";
 
 //movie context
 import { MovieContext } from "../../context/MovieContext";
-import { modeContext } from "../../context/ModeContext";
+import { ModeContext } from "../../context/ModeContext";
 
 function MoviesList() {
     //fetching movies from movie context
     const { movies } = useContext(MovieContext);
-    const { whiteMode } = useContext(modeContext);
+    const { whiteMode } = useContext(ModeContext);
 
     return (
-        <div className={`movie-list-box ${whiteMode && "white-mode"}`}>
+        <div className={`movie-list-box `}>
             {movies?.map((movie) => (
                 <div
                     key={movie?.id}
-                    className="movie"
+                    className={`movie ${whiteMode && "white-mode"}`}
                 >
                     <img
                         src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}

@@ -3,6 +3,10 @@ footer {
     flex-direction: column;
     background: var(--black);
 }
+footer.white-mode {
+    background: var(--light-white-secondary);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 
 footer .wrapper {
     width: 70%;

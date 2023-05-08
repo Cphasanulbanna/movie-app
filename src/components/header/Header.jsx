@@ -7,10 +7,16 @@ import "./header.css";
 import { useNavigate } from "react-router-dom";
 
 //mode context
-import { modeContext } from "../../context/ModeContext";
+import { ModeContext } from "../../context/ModeContext";
+
+// icons
+import darkmode from "../../assets/images/darkmode.png";
+import whitemode from "../../assets/images/whitemode.png";
+import profileBlack from "../../assets/images/profile-black.png";
+import profileWhite from "../../assets/images/profile-white.png";
 
 function Header() {
-    const { whiteMode, setWhiteMode } = useContext(modeContext);
+    const { whiteMode, setWhiteMode } = useContext(ModeContext);
 
     const navigate = useNavigate();
 
@@ -25,6 +31,9 @@ function Header() {
         navigate("/login");
     };
 
+    //user-data from local storage
+    const userData = localStorage.getItem("user_data");
+
     return (
         <header>
             <div className="logo-box">
@@ -38,24 +47,29 @@ function Header() {
             </div>
 
             <div className="right">
-                <button
+                <div
                     className={`mode ${whiteMode && "white-mode"}`}
                     onClick={toggleMode}
                 >
-                    Light
-                </button>
-                <button
-                    onClick={logout}
-                    className="logout"
-                >
-                    <span>Logout</span>
-                    <span className="profile">
-                        <img
-                            src={require("../../assets/images/profile.svg").default}
-                            alt="profile"
-                        />
-                    </span>
-                </button>
+                    <img
+                        src={whiteMode ? whitemode : darkmode}
+                        alt="dark/white-moode"
+                    />
+                </div>
+                {userData && (
+                    <button
+                        onClick={logout}
+                        className={`logout ${whiteMode && "white-mode"}`}
+                    >
+                        <span className={whiteMode && "white-mode"}>Logout</span>
+                        <span className="profile">
+                            <img
+                                src={whiteMode ? profileBlack : profileWhite}
+                                alt="profile"
+                            />
+                        </span>
+                    </button>
+                )}
             </div>
         </header>
     );

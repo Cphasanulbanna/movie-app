@@ -10,6 +10,10 @@
     height: 550px;
 }
 
+.login-container.white-mode {
+    background-color: var(--light-white);
+}
+
 .login-container .content {
     display: flex;
     flex-direction: column;
@@ -26,6 +30,9 @@
     color: var(--white);
     font-size: 32px;
     margin-bottom: 30px;
+}
+.login-container .content .top h1.white-mode {
+    color: var(--black);
 }
 
 .login-container .content .top form {
@@ -57,6 +64,10 @@
     font-size: 16px;
     border-radius: 4px;
 }
+.login-container .content .top form input.white-mode {
+    background-color: var(--dark-overlay-secondary);
+    color: var(--dark-grey);
+}
 
 .login-container .content .top form input:last-child {
     margin-bottom: 0;
@@ -70,14 +81,25 @@
     cursor: pointer;
 }
 
+.login-container .content .top form span.white-mode {
+    color: var(--dark-grey);
+}
+
 .login-container .content p {
     color: var(--grey);
     font-size: 16px;
+}
+.login-container .content p.white-mode {
+    color: var(--dark-grey);
 }
 
 .login-container .content p span {
     color: var(--white);
     cursor: pointer;
+}
+.login-container .content p span.white-mode {
+    color: var(--black);
+    font-weight: bold;
 }
 
 .login-container .content .top .error {

@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 //css
 import "./login.css";
 
 //packages
 import { useLocation, useNavigate } from "react-router-dom";
+import { ModeContext } from "../../context/ModeContext";
 
 function Login() {
     //input states
@@ -20,6 +21,9 @@ function Login() {
 
     //userdata[token] from local storage
     const userData = localStorage.getItem("user_data");
+
+    const { whiteMode } = useContext(ModeContext);
+    console.log(whiteMode, "mode");
 
     //storing name
     const handleNameChange = (e) => {
@@ -101,10 +105,10 @@ function Login() {
     }, []);
 
     return (
-        <div className="login-container">
+        <div className={`login-container ${whiteMode && "white-mode"}`}>
             <div className="content">
                 <div className="top">
-                    <h1>Sign In</h1>
+                    <h1 className={whiteMode && "white-mode"}>Sign In</h1>
                     <form
                         onSubmit={login}
                         className="login-form"
@@ -116,6 +120,7 @@ function Login() {
                             value={name}
                             onKeyDown={handleKeyDown}
                             ref={inputRef}
+                            className={whiteMode && "white-mode"}
                         />
                         <input
                             type="text"
@@ -123,17 +128,21 @@ function Login() {
                             onChange={handlePasswordChange}
                             value={password}
                             onKeyDown={handleKeyDown}
+                            className={whiteMode && "white-mode"}
                         />
 
                         <button type="submit">
                             Sign In
                             <p className="error">{errorMsg}</p>
                         </button>
-                        <span className="forgot-password">Forgot Pasword?</span>
+                        <span className={`forgot-password ${whiteMode && "white-mode"}`}>
+                            Forgot Pasword?
+                        </span>
                     </form>
                 </div>
-                <p>
-                    New to Debug Media? <span> Sign up now.</span>
+                <p className={whiteMode && "white-mode"}>
+                    New to Debug Media?{" "}
+                    <span className={whiteMode && "white-mode"}> Sign up now.</span>
                 </p>
             </div>
         </div>

@@ -3,17 +3,18 @@
     grid-template-columns: repeat(5, 1fr);
     justify-items: center;
     gap: 25px;
-    background: var(--light-overlay);
+    /* background: var(--light-overlay); */
     border-radius: 20px 20px 0px 0px;
     overflow-y: auto;
-    padding: 40px 0;
-}
-
-.movie-list-box.white-mode {
+    padding: 10px 0 40px;
 }
 
 .movie-list-box .movie {
     background-color: #bdb7b7;
     width: 160px;
     height: 240px;
+}
+
+.movie-list-box .movie.white-mode {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
