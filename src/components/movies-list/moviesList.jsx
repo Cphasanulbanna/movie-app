@@ -4,12 +4,12 @@ import React, { useContext } from "react";
 import "./movies-list.css";
 
 //movie context
-import { MovieContext } from "../../context/MovieContext";
+import { MovieContext, useMovies } from "../../context/MovieContext";
 import { ModeContext, useMode } from "../../context/ModeContext";
 
 function MoviesList() {
     //fetching movies from movie context
-    const { movies } = useContext(MovieContext);
+    const { movies } = useMovies();
     const { whiteMode } = useMode();
 
     return (

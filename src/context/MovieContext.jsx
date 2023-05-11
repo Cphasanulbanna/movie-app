@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 //packages
 import axios from "axios";
@@ -47,4 +47,8 @@ export const MovieProvider = ({ children }) => {
             {children}
         </MovieContext.Provider>
     );
+};
+
+export const useMovies = () => {
+    return useContext(MovieContext);
 };

@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 
 //css
 import "./search-bar.css";
 
 // contexts
-import { MovieContext } from "../../context/MovieContext";
-import { ModeContext, useMode } from "../../context/ModeContext";
+import { useMovies } from "../../context/MovieContext";
+import { useMode } from "../../context/ModeContext";
 
 function SearchBar() {
-    const { setSearchedWord } = useContext(MovieContext);
+    const { setSearchedWord } = useMovies();
     const { whiteMode } = useMode();
 
     //storing search input value
