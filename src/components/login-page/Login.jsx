@@ -1,44 +1,54 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 //css
 import "./login.css";
 
 //packages
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //mode context
-import { ModeContext, useMode } from "../../context/ModeContext";
+import { useMode } from "../../context/ModeContext";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { FormLayout } from "../layouts/form-layout/FormLayout";
+import Input from "../reusable-form-elements/Input";
 function Login() {
-    //input states
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
+    //form fields state
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
 
-    //error-message state
-    const [errorMsg, setErrorMsg] = useState("");
+    //error message state
+    const [errors, setErrors] = useState({
+        email: "",
+        password: "",
+    });
+
+    //login function
+    const login = (e) => {
+        e.preventDefault();
+
+        const token = generateRandomToken();
+        if (validateFields()) {
+            setlocalStorage("user_data", token);
+            navigate("/", { replace: true });
+            return;
+        }
+    };
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const inputRef = useRef(null);
 
     //userdata[token] from local storage
-    const { getlocalStorage, setlocalStorage } = useLocalStorage();
-    const userData = getlocalStorage("user_data");
+    const { setlocalStorage } = useLocalStorage();
 
     const { whiteMode } = useMode();
 
-    //storing name
-    const handleNameChange = (e) => {
-        const { value } = e.target;
-        setName(value);
-    };
-
-    //storing password
-    const handlePasswordChange = (e) => {
-        const { value } = e.target;
-        setPassword(value);
+    //storing data into state
+    const handleDataChange = (e) => {
+        const value = e.target.value;
+        const fieldName = e.target.name;
+        setFormData({ ...formData, [fieldName]: value });
     };
 
     //generating random token while login
@@ -46,92 +56,85 @@ function Login() {
         const randomString1 = Math.random().toString(36).substring(7);
         const randomString2 = Math.random().toString(36).substring(7);
         const randomString3 = Math.random().toString(36).substring(7);
-        if (name !== "" && password !== "") {
-            return `${randomString1}${name}${randomString2}${password}${randomString3}`;
+        if (formData?.email !== "" && formData?.password !== "") {
+            return `${randomString1}${formData?.email}${randomString2}${formData?.password}${randomString3}`;
         }
     };
 
-    //validating errors
-    const validateError = () => {
-        let error = "";
-        if (!name && !password) {
-            setErrorMsg("All fields are required");
-            error = "All fields are required";
-        } else if (!name) {
-            setErrorMsg("Name is required");
-            error = "Name is required";
-        } else if (!password) {
-            setErrorMsg("password is required");
-            error = "password is required";
-        } else if (password) {
-            if (password.length < 6) {
-                setErrorMsg("password must be atleast 6");
-                error = "password must be atleast 6";
+    //handling error messages
+    const validateFields = () => {
+        const fields = Object.keys(formData);
+        const errorObjCopy = { ...errors };
+        fields.map((field) => {
+            if (formData[field] === "") {
+                errorObjCopy[field] = `${field} is required`;
+            } else {
+                errorObjCopy[field] = "";
             }
-        } else {
-            setErrorMsg("");
-            error = "";
-        }
 
-        setErrorMsg(error);
-        return error;
+            //checking if email is valid when field is not empty
+            if (field === "email") {
+                if (
+                    formData[field] !== "" &&
+                    !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData[field])
+                ) {
+                    errorObjCopy[field] = "invalid email";
+                }
+            }
+
+            if (field === "password") {
+                if (formData[field] !== "") {
+                    if (formData[field].length < 6) {
+                        errorObjCopy[field] = "password must be atleast 6 digits";
+                    }
+                }
+            }
+        });
+
+        setErrors(errorObjCopy);
+
+        if (Object.values(errorObjCopy).some((error) => error !== "")) {
+            return false;
+        }
+        return true;
     };
 
-    //login function
-    const login = (e) => {
-        e.preventDefault();
-        const error = validateError();
-        const token = generateRandomToken();
-        if (token && error === "") {
-            setlocalStorage("user_data", token);
-            navigate("/", { replace: true });
-        }
-    };
+    const inputRef = useRef(null);
 
     //invoking login function while pressing enter key
     const handleKeyDown = (e) => {
         if (e.key === 13) {
-            if (name && password) {
+            if (validateFields()) {
                 login();
             }
         }
     };
-
-    // useEffect(() => {
-    //     if (userData) {
-    //         navigate("/");
-    //     }
-    // }, [location]);
-
-    //auto-focusing first input
-    useEffect(() => {
-        inputRef.current.focus();
-    }, []);
 
     return (
         <FormLayout>
             <div className="top">
                 <h1 className={whiteMode && "white-mode"}>Sign In</h1>
                 <form
+                    autoComplete="off"
                     onSubmit={login}
                     className="login-form"
                 >
-                    <input
-                        type="text"
-                        placeholder="Email or phone number"
-                        onChange={handleNameChange}
-                        value={name}
+                    <Input
+                        formData={formData}
+                        handleDataChange={handleDataChange}
+                        errors={errors.email}
+                        type={"text"}
+                        name="email"
+                        inputRef={inputRef}
                         onKeyDown={handleKeyDown}
-                        ref={inputRef}
-                        className={whiteMode && "white-mode"}
                     />
-                    <input
-                        type="text"
-                        placeholder="Password"
-                        onChange={handlePasswordChange}
-                        value={password}
+                    <Input
+                        formData={formData}
+                        handleDataChange={handleDataChange}
+                        errors={errors.password}
+                        type={"password"}
+                        name="password"
                         onKeyDown={handleKeyDown}
-                        className={whiteMode && "white-mode"}
                     />
 
                     <button
@@ -139,7 +142,6 @@ function Login() {
                         type="submit"
                     >
                         Sign In
-                        <p className="error">{errorMsg}</p>
                     </button>
                     <span className={`forgot-password ${whiteMode && "white-mode"}`}>
                         Forgot Pasword?

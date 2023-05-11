@@ -56,3 +56,21 @@ ul {
     z-index: 1;
     background: rgba(0, 0, 0, 0.75);
 }
+
+.top form .input-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 25px;
+}
+.top form .input-container:last-child {
+    margin-bottom: 0;
+}
+.top form div.input-container span.error-message {
+    font-size: 13px;
+    color: red;
+    position: absolute;
+    z-index: 2;
+    bottom: -20px;
+    left: 0;
+}
