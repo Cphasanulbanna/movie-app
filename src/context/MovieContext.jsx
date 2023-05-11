@@ -49,6 +49,7 @@ export const MovieProvider = ({ children }) => {
     );
 };
 
+//custom hook
 export const useMovies = () => {
     return useContext(MovieContext);
 };

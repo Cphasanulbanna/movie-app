@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ModeContext, useMode } from "../../context/ModeContext";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { FormLayout } from "../layouts/form-layout/FormLayout";
 function Login() {
     //input states
     const [name, setName] = useState("");
@@ -108,50 +109,47 @@ function Login() {
     }, []);
 
     return (
-        <div className={`login-container ${whiteMode && "white-mode"}`}>
-            <div className="content">
-                <div className="top">
-                    <h1 className={whiteMode && "white-mode"}>Sign In</h1>
-                    <form
-                        onSubmit={login}
-                        className="login-form"
-                    >
-                        <input
-                            type="text"
-                            placeholder="Email or phone number"
-                            onChange={handleNameChange}
-                            value={name}
-                            onKeyDown={handleKeyDown}
-                            ref={inputRef}
-                            className={whiteMode && "white-mode"}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Password"
-                            onChange={handlePasswordChange}
-                            value={password}
-                            onKeyDown={handleKeyDown}
-                            className={whiteMode && "white-mode"}
-                        />
+        <FormLayout>
+            <div className="top">
+                <h1 className={whiteMode && "white-mode"}>Sign In</h1>
+                <form
+                    onSubmit={login}
+                    className="login-form"
+                >
+                    <input
+                        type="text"
+                        placeholder="Email or phone number"
+                        onChange={handleNameChange}
+                        value={name}
+                        onKeyDown={handleKeyDown}
+                        ref={inputRef}
+                        className={whiteMode && "white-mode"}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Password"
+                        onChange={handlePasswordChange}
+                        value={password}
+                        onKeyDown={handleKeyDown}
+                        className={whiteMode && "white-mode"}
+                    />
 
-                        <button
-                            className={whiteMode && "white-mode"}
-                            type="submit"
-                        >
-                            Sign In
-                            <p className="error">{errorMsg}</p>
-                        </button>
-                        <span className={`forgot-password ${whiteMode && "white-mode"}`}>
-                            Forgot Pasword?
-                        </span>
-                    </form>
-                </div>
-                <p className={whiteMode && "white-mode"}>
-                    New to Debug Media?{" "}
-                    <span className={whiteMode && "white-mode"}> Sign up now.</span>
-                </p>
+                    <button
+                        className={whiteMode && "white-mode"}
+                        type="submit"
+                    >
+                        Sign In
+                        <p className="error">{errorMsg}</p>
+                    </button>
+                    <span className={`forgot-password ${whiteMode && "white-mode"}`}>
+                        Forgot Pasword?
+                    </span>
+                </form>
             </div>
-        </div>
+            <p className={whiteMode && "white-mode"}>
+                New to Debug Media? <span className={whiteMode && "white-mode"}> Sign up now.</span>
+            </p>
+        </FormLayout>
     );
 }
 
