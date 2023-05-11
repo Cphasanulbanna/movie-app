@@ -12,6 +12,7 @@ import Movies from "../movies/Movies";
 import Footer from "../footer/Footer";
 import Login from "../login-page/Login";
 import PrivateRoute from "../routes/PrivateRoute";
+import ProtectedRouteAfterLogin from "../routes/ProtectedRouteAfterLogin";
 
 function LandingPage() {
     return (
@@ -25,10 +26,12 @@ function LandingPage() {
                             element={<Movies />}
                         />
                     </Route>
-                    <Route
-                        path="/login"
-                        element={<Login />}
-                    />
+                    <Route element={<ProtectedRouteAfterLogin />}>
+                        <Route
+                            path="/login"
+                            element={<Login />}
+                        />
+                    </Route>
                 </Routes>
                 <Footer />
             </section>

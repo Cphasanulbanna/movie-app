@@ -5,11 +5,11 @@ import "./search-bar.css";
 
 // contexts
 import { MovieContext } from "../../context/MovieContext";
-import { ModeContext } from "../../context/ModeContext";
+import { ModeContext, useMode } from "../../context/ModeContext";
 
 function SearchBar() {
     const { setSearchedWord } = useContext(MovieContext);
-    const { whiteMode } = useContext(ModeContext);
+    const { whiteMode } = useMode();
 
     //storing search input value
     const handleInputChange = (e) => {

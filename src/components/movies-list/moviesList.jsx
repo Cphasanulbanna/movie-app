@@ -5,12 +5,12 @@ import "./movies-list.css";
 
 //movie context
 import { MovieContext } from "../../context/MovieContext";
-import { ModeContext } from "../../context/ModeContext";
+import { ModeContext, useMode } from "../../context/ModeContext";
 
 function MoviesList() {
     //fetching movies from movie context
     const { movies } = useContext(MovieContext);
-    const { whiteMode } = useContext(ModeContext);
+    const { whiteMode } = useMode();
 
     return (
         <div className={`movie-list-box `}>

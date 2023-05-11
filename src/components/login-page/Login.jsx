@@ -7,7 +7,7 @@ import "./login.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
 //mode context
-import { ModeContext } from "../../context/ModeContext";
+import { ModeContext, useMode } from "../../context/ModeContext";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 function Login() {
@@ -26,7 +26,7 @@ function Login() {
     const { getlocalStorage, setlocalStorage } = useLocalStorage();
     const userData = getlocalStorage("user_data");
 
-    const { whiteMode } = useContext(ModeContext);
+    const { whiteMode } = useMode();
 
     //storing name
     const handleNameChange = (e) => {
@@ -96,11 +96,11 @@ function Login() {
         }
     };
 
-    useEffect(() => {
-        if (userData) {
-            navigate("/");
-        }
-    }, [location]);
+    // useEffect(() => {
+    //     if (userData) {
+    //         navigate("/");
+    //     }
+    // }, [location]);
 
     //auto-focusing first input
     useEffect(() => {

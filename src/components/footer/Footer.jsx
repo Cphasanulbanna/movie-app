@@ -4,11 +4,11 @@ import React, { useContext, useEffect, useRef } from "react";
 import "./footer.css";
 
 //mode context
-import { ModeContext } from "../../context/ModeContext";
+import { ModeContext, useMode } from "../../context/ModeContext";
 import { useLocation } from "react-router-dom";
 
 function Footer() {
-    const { whiteMode } = useContext(ModeContext);
+    const { whiteMode } = useMode();
     const location = useLocation();
     const footerRef = useRef(null);
 

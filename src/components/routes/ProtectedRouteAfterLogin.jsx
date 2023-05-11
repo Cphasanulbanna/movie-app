@@ -1,7 +1,13 @@
 import React from "react";
 
+//packages
+import { Navigate, Outlet } from "react-router-dom";
+import useLocalStorage from "../../hooks/useLocalStorage";
+
 function ProtectedRouteAfterLogin() {
-    return <div>ProtectedRouteAfterLogin</div>;
+    const { getlocalStorage } = useLocalStorage();
+    const userData = getlocalStorage("user_data");
+    return userData ? <Navigate to="/" /> : <Outlet />;
 }
 
 export default ProtectedRouteAfterLogin;

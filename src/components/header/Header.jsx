@@ -7,7 +7,7 @@ import "./header.css";
 import { useNavigate } from "react-router-dom";
 
 //mode context
-import { ModeContext } from "../../context/ModeContext";
+import { ModeContext, useMode } from "../../context/ModeContext";
 
 // icons
 import darkmode from "../../assets/images/darkmode.png";
@@ -17,7 +17,7 @@ import profileWhite from "../../assets/images/profile-white.png";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 function Header() {
-    const { whiteMode, setWhiteMode } = useContext(ModeContext);
+    const { whiteMode, setWhiteMode } = useMode();
 
     const navigate = useNavigate();
 
