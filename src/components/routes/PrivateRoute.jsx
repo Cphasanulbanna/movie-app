@@ -1,13 +1,17 @@
 import React from "react";
 
 //packages
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+
+//custom hooks
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 function PrivateRoute({ children }) {
     //fetching userdata[token] from local storage
-    const userData = localStorage.getItem("user_data");
+    const { getlocalStorage } = useLocalStorage();
+    const userData = getlocalStorage("user_data");
 
-    return userData ? children : <Navigate to={"/login"} />;
+    return userData ? <Outlet /> : <Navigate to={"/login"} />;
 }
 
 export default PrivateRoute;

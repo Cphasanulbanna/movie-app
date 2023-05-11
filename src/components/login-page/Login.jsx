@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 //mode context
 import { ModeContext } from "../../context/ModeContext";
 
+import useLocalStorage from "../../hooks/useLocalStorage";
 function Login() {
     //input states
     const [name, setName] = useState("");
@@ -22,7 +23,8 @@ function Login() {
     const inputRef = useRef(null);
 
     //userdata[token] from local storage
-    const userData = localStorage.getItem("user_data");
+    const { getlocalStorage, setlocalStorage } = useLocalStorage();
+    const userData = getlocalStorage("user_data");
 
     const { whiteMode } = useContext(ModeContext);
 
@@ -80,8 +82,8 @@ function Login() {
         const error = validateError();
         const token = generateRandomToken();
         if (token && error === "") {
-            localStorage.setItem("user_data", JSON.stringify(token));
-            navigate("/");
+            setlocalStorage("user_data", token);
+            navigate("/", { replace: true });
         }
     };
 

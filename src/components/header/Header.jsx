@@ -14,6 +14,7 @@ import darkmode from "../../assets/images/darkmode.png";
 import whitemode from "../../assets/images/whitemode.png";
 import profileBlack from "../../assets/images/profile-black.png";
 import profileWhite from "../../assets/images/profile-white.png";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 function Header() {
     const { whiteMode, setWhiteMode } = useContext(ModeContext);
@@ -32,7 +33,8 @@ function Header() {
     };
 
     //user-data from local storage
-    const userData = localStorage.getItem("user_data");
+    const { getlocalStorage } = useLocalStorage();
+    const userData = getlocalStorage("user_data");
 
     return (
         <header className={whiteMode && "white-mode"}>

@@ -19,14 +19,12 @@ function LandingPage() {
             <section id="landing-page">
                 <Header />
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <PrivateRoute>
-                                <Movies />
-                            </PrivateRoute>
-                        }
-                    />
+                    <Route element={<PrivateRoute />}>
+                        <Route
+                            path="/"
+                            element={<Movies />}
+                        />
+                    </Route>
                     <Route
                         path="/login"
                         element={<Login />}
