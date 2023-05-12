@@ -1,19 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-
-//css
-import "./login.css";
-
-//packages
-import { Link, useNavigate } from "react-router-dom";
-
-//mode context
-import { useMode } from "../../context/ModeContext";
-
-import useLocalStorage from "../../hooks/useLocalStorage";
+import React, { useRef, useState } from "react";
 import { FormLayout } from "../layouts/form-layout/FormLayout";
 import Input from "../reusable-form-elements/Input";
 import Button from "../reusable-form-elements/Button";
-function Login() {
+import { useMode } from "../../context/ModeContext";
+import { Link, useNavigate } from "react-router-dom";
+import "./signup.css";
+
+function Signup() {
     //form fields state
     const [formData, setFormData] = useState({
         email: "",
@@ -26,25 +19,6 @@ function Login() {
         password: "",
     });
 
-    //login function
-    const login = (e) => {
-        e.preventDefault();
-
-        const token = generateRandomToken();
-        if (validateFields()) {
-            setlocalStorage("user_data", token);
-            navigate("/", { replace: true });
-            return;
-        }
-    };
-
-    const navigate = useNavigate();
-
-    //userdata[token] from local storage
-    const { setlocalStorage } = useLocalStorage();
-
-    const { whiteMode } = useMode();
-
     //storing data into state
     const handleDataChange = (e) => {
         const value = e.target.value;
@@ -52,13 +26,16 @@ function Login() {
         setFormData({ ...formData, [fieldName]: value });
     };
 
-    //generating random token while login
-    const generateRandomToken = () => {
-        const randomString1 = Math.random().toString(36).substring(7);
-        const randomString2 = Math.random().toString(36).substring(7);
-        const randomString3 = Math.random().toString(36).substring(7);
-        if (formData?.email !== "" && formData?.password !== "") {
-            return `${randomString1}${formData?.email}${randomString2}${formData?.password}${randomString3}`;
+    const { whiteMode } = useMode();
+    const inputRef = useRef(null);
+    const navigate = useNavigate();
+
+    //invoking login function while pressing enter key
+    const handleKeyDown = (e) => {
+        if (e.key === 13) {
+            if (validateFields()) {
+                signup();
+            }
         }
     };
 
@@ -100,24 +77,22 @@ function Login() {
         return true;
     };
 
-    const inputRef = useRef(null);
+    //login function
+    const signup = (e) => {
+        e.preventDefault();
 
-    //invoking login function while pressing enter key
-    const handleKeyDown = (e) => {
-        if (e.key === 13) {
-            if (validateFields()) {
-                login();
-            }
+        if (validateFields()) {
+            navigate("/login", { replace: true });
+            return;
         }
     };
-
     return (
         <FormLayout>
             <div className="top">
-                <h1 className={whiteMode && "white-mode"}>Sign In</h1>
+                <h1 className={whiteMode && "white-mode"}>Register</h1>
                 <form
                     autoComplete="off"
-                    onSubmit={login}
+                    onSubmit={signup}
                     className="login-form"
                 >
                     <Input
@@ -138,24 +113,20 @@ function Login() {
                         onKeyDown={handleKeyDown}
                     />
 
-                    <Button text={"Sign In"} />
-                    <span className={`forgot-password ${whiteMode && "white-mode"}`}>
-                        Forgot Pasword?
-                    </span>
+                    <Button text={"Register"} />
                 </form>
             </div>
             <p className={whiteMode && "white-mode"}>
-                New to Debug Media?{" "}
+                Already registered{" "}
                 <Link
-                    to={"/signup"}
+                    to={"/login"}
                     className={whiteMode && "white-mode"}
                 >
-                    {" "}
-                    Sign up now.
+                    Login now.
                 </Link>
             </p>
         </FormLayout>
     );
 }
 
-export default Login;
+export default Signup;

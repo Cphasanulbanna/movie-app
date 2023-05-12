@@ -17,40 +17,8 @@
     flex-direction: column;
 }
 
-.login-container .content .top form button {
-    color: var(--white);
-    background-color: var(--red);
-    margin-top: 10px;
-    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.55);
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    font-size: 16px;
-    border: 0;
-    position: relative;
-}
 .login-container .content .top form button.white-mode {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.login-container .content .top form input {
-    background-color: var(--dark-grey);
-    color: var(--grey-text);
-    height: 50px;
-    padding: 0 10px;
-    font-size: 16px;
-    border-radius: 4px;
-}
-.login-container .content .top form input.white-mode {
-    background-color: var(--dark-overlay-secondary);
-    color: var(--dark-grey);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.login-container .content .top form input:last-child {
-    margin-bottom: 0;
 }
 
 .login-container .content .top form span {
@@ -63,23 +31,6 @@
 
 .login-container .content .top form span.white-mode {
     color: var(--dark-grey);
-}
-
-.login-container .content p {
-    color: var(--grey);
-    font-size: 16px;
-}
-.login-container .content p.white-mode {
-    color: var(--dark-grey);
-}
-
-.login-container .content p span {
-    color: var(--white);
-    cursor: pointer;
-}
-.login-container .content p span.white-mode {
-    color: var(--black);
-    font-weight: bold;
 }
 
 @media all and (max-width: 480px) {

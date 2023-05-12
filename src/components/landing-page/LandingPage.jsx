@@ -13,6 +13,7 @@ import Footer from "../footer/Footer";
 import Login from "../login-page/Login";
 import PrivateRoute from "../routes/PrivateRoute";
 import ProtectedRouteAfterLogin from "../routes/ProtectedRouteAfterLogin";
+import Signup from "../signup/Signup";
 
 function LandingPage() {
     return (
@@ -32,6 +33,10 @@ function LandingPage() {
                             element={<Login />}
                         />
                     </Route>
+                    <Route
+                        path="signup"
+                        element={<Signup />}
+                    />
                 </Routes>
                 <Footer />
             </section>
