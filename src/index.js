@@ -4,17 +4,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MovieProvider } from "./context/MovieContext";
 import { ModeProvider } from "./context/ModeContext";
-import { AuthPrrovider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <ModeProvider>
-            <AuthPrrovider>
+            <AuthProvider>
                 <MovieProvider>
                     <App />
                 </MovieProvider>
-            </AuthPrrovider>
+            </AuthProvider>
         </ModeProvider>
     </React.StrictMode>
 );
