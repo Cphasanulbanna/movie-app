@@ -16,6 +16,7 @@ import Signup from "../signup/Signup";
 //protected routes
 import PrivateRoute from "../routes/PrivateRoute";
 import ProtectedRouteAfterLogin from "../routes/ProtectedRouteAfterLogin";
+import ForgetPassword from "../forget-password/ForgetPassword";
 
 function LandingPage() {
     return (
@@ -35,8 +36,12 @@ function LandingPage() {
                             element={<Login />}
                         />
                         <Route
-                            path="signup"
+                            path="/signup"
                             element={<Signup />}
+                        />
+                        <Route
+                            path="/reset-password"
+                            element={<ForgetPassword />}
                         />
                     </Route>
                 </Routes>

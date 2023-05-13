@@ -1,22 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 
 //css
-import "./login.css";
+import "./forget-password.css";
 
 //packages
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-//custom hooks
-import { useMode } from "../../context/ModeContext";
-import useLocalStorage from "../../hooks/useLocalStorage";
-
-//components
+//resusable components
 import { FormLayout } from "../layouts/form-layout/FormLayout";
 import Input from "../reusable-form-elements/Input";
 import Button from "../reusable-form-elements/Button";
 
-function Login() {
-    const [credentials, setCredentials] = useState(null);
+//custom hook
+import { useMode } from "../../context/ModeContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
+
+function ForgetPassword() {
+    const [email, setEmail] = useState("");
     //form fields state
     const [formData, setFormData] = useState({
         email: "",
@@ -29,47 +29,25 @@ function Login() {
         password: "",
     });
 
-    //credentials from localStorage
-    useEffect(() => {
-        const credentials = getlocalStorage("credentials");
-        setCredentials(credentials);
-    }, []);
-
-    //login function
-    const login = (e) => {
+    //reset password function
+    const resetPassword = (e) => {
         e.preventDefault();
 
-        const token = generateRandomToken();
         if (validateFields()) {
-            setlocalStorage("user_data", token);
-            navigate("/", { replace: true });
+            setlocalStorage("credentials", formData);
             return;
         }
     };
 
-    const navigate = useNavigate();
-    const inputRef = useRef(null);
     const { whiteMode } = useMode();
-
-    //userdata[token] from local storage
     const { setlocalStorage, getlocalStorage } = useLocalStorage();
+    const inputRef = useRef(null);
 
-    //storing data into state
-    const handleDataChange = (e) => {
-        const value = e.target.value;
-        const fieldName = e.target.name;
-        setFormData({ ...formData, [fieldName]: value });
-    };
-
-    //generating random token while login
-    const generateRandomToken = () => {
-        const randomString1 = Math.random().toString(36).substring(7);
-        const randomString2 = Math.random().toString(36).substring(7);
-        const randomString3 = Math.random().toString(36).substring(7);
-        if (formData?.email !== "" && formData?.password !== "") {
-            return `${randomString1}${formData?.email}${randomString2}${formData?.password}${randomString3}`;
-        }
-    };
+    //fetching email[credential] from localstorage
+    useEffect(() => {
+        const credentials = getlocalStorage("credentials");
+        setEmail(credentials?.email);
+    }, []);
 
     //handling error messages
     const validateFields = () => {
@@ -83,8 +61,8 @@ function Login() {
                 if (field === "email") {
                     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData[field])) {
                         errorObjCopy[field] = "Invalid email";
-                    } else if (formData[field] !== credentials?.email) {
-                        errorObjCopy[field] = "Incorrect email";
+                    } else if (formData[field] !== email) {
+                        errorObjCopy[field] = "Email does not match";
                     } else {
                         errorObjCopy[field] = "";
                     }
@@ -94,8 +72,6 @@ function Login() {
                 if (field === "password") {
                     if (formData[field].length < 6) {
                         errorObjCopy[field] = "password must be atleast 6 digits";
-                    } else if (formData[field] !== credentials?.password) {
-                        errorObjCopy[field] = "Incorrect password";
                     } else {
                         errorObjCopy[field] = "";
                     }
@@ -106,28 +82,35 @@ function Login() {
         });
 
         setErrors(errorObjCopy);
+
         if (Object.values(errorObjCopy).some((error) => error !== "")) {
             return false;
         }
         return true;
     };
 
-    //invoking login function while pressing enter key
+    //storing data into state
+    const handleDataChange = (e) => {
+        const value = e.target.value;
+        const fieldName = e.target.name;
+        setFormData({ ...formData, [fieldName]: value });
+    };
+
+    //invoking signup function while pressing enter key
     const handleKeyDown = (e) => {
         if (e.key === 13) {
             if (validateFields()) {
-                login();
+                resetPassword();
             }
         }
     };
-
     return (
         <FormLayout>
             <div className="top">
-                <h1 className={whiteMode && "white-mode"}>Sign In</h1>
+                <h1 className={whiteMode && "white-mode"}>Reset Password</h1>
                 <form
                     autoComplete="off"
-                    onSubmit={login}
+                    onSubmit={resetPassword}
                     className="login-form"
                 >
                     <Input
@@ -146,29 +129,23 @@ function Login() {
                         type={"password"}
                         name="password"
                         onKeyDown={handleKeyDown}
+                        placeholder={"New Password"}
                     />
 
-                    <Button text={"Sign In"} />
-                    <Link
-                        to={"/reset-password"}
-                        className={`forgot-password ${whiteMode && "white-mode"}`}
-                    >
-                        Forgot Pasword?
-                    </Link>
+                    <Button text={"Reset Password"} />
                 </form>
             </div>
             <p className={whiteMode && "white-mode"}>
-                New to Debug Media?{" "}
+                Already registered{" "}
                 <Link
-                    to={"/signup"}
+                    to={"/login"}
                     className={whiteMode && "white-mode"}
                 >
-                    {" "}
-                    Sign up now.
+                    Login now.
                 </Link>
             </p>
         </FormLayout>
     );
 }
 
-export default Login;
+export default ForgetPassword;
