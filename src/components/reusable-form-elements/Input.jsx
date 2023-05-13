@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+
+//custom hooks
 import { useMode } from "../../context/ModeContext";
 
 function Input({ formData, handleDataChange, errors, type, name, ref }) {

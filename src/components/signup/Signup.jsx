@@ -1,9 +1,17 @@
 import React, { useRef, useState } from "react";
+
+//components
 import { FormLayout } from "../layouts/form-layout/FormLayout";
 import Input from "../reusable-form-elements/Input";
 import Button from "../reusable-form-elements/Button";
+
+//custom hooks
 import { useMode } from "../../context/ModeContext";
+
+//packages
 import { Link, useNavigate } from "react-router-dom";
+
+//css
 import "./signup.css";
 
 function Signup() {
@@ -30,7 +38,7 @@ function Signup() {
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
-    //invoking login function while pressing enter key
+    //invoking signup function while pressing enter key
     const handleKeyDown = (e) => {
         if (e.key === 13) {
             if (validateFields()) {
@@ -77,7 +85,7 @@ function Signup() {
         return true;
     };
 
-    //login function
+    //signup function
     const signup = (e) => {
         e.preventDefault();
 

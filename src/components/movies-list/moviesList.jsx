@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 
 //css;
 import "./movies-list.css";
 
-//movie context
-import { MovieContext, useMovies } from "../../context/MovieContext";
-import { ModeContext, useMode } from "../../context/ModeContext";
+//custom hooks
+import { useMovies } from "../../context/MovieContext";
+import { useMode } from "../../context/ModeContext";
 
 function MoviesList() {
     //fetching movies from movie context

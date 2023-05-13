@@ -1,4 +1,6 @@
 import React from "react";
+
+//custom hooks
 import { useMode } from "../../context/ModeContext";
 
 function Button({ text }) {

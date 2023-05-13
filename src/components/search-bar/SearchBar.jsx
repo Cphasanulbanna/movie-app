@@ -3,7 +3,7 @@ import React from "react";
 //css
 import "./search-bar.css";
 
-// contexts
+// custom hooks
 import { useMovies } from "../../context/MovieContext";
 import { useMode } from "../../context/ModeContext";
 

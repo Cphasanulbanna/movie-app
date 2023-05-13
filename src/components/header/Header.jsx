@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 //css
 import "./header.css";
@@ -6,15 +6,15 @@ import "./header.css";
 //packages
 import { useNavigate } from "react-router-dom";
 
-//mode context
-import { ModeContext, useMode } from "../../context/ModeContext";
+//custom hooks
+import { useMode } from "../../context/ModeContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 // icons
 import darkmode from "../../assets/images/darkmode.png";
 import whitemode from "../../assets/images/whitemode.png";
 import profileBlack from "../../assets/images/profile-black.png";
 import profileWhite from "../../assets/images/profile-white.png";
-import useLocalStorage from "../../hooks/useLocalStorage";
 
 function Header() {
     const { whiteMode, setWhiteMode } = useMode();

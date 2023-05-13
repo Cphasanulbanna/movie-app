@@ -9,8 +9,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //component
 import LandingPage from "./components/landing-page/LandingPage";
-import Movies from "./components/movies/Movies";
-import Login from "./components/login-page/Login";
 
 function App() {
     return (

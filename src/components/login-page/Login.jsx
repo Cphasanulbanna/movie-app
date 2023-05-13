@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 //css
 import "./login.css";
@@ -6,10 +6,11 @@ import "./login.css";
 //packages
 import { Link, useNavigate } from "react-router-dom";
 
-//mode context
+//custom hooks
 import { useMode } from "../../context/ModeContext";
-
 import useLocalStorage from "../../hooks/useLocalStorage";
+
+//components
 import { FormLayout } from "../layouts/form-layout/FormLayout";
 import Input from "../reusable-form-elements/Input";
 import Button from "../reusable-form-elements/Button";
@@ -39,11 +40,11 @@ function Login() {
     };
 
     const navigate = useNavigate();
+    const inputRef = useRef(null);
+    const { whiteMode } = useMode();
 
     //userdata[token] from local storage
     const { setlocalStorage } = useLocalStorage();
-
-    const { whiteMode } = useMode();
 
     //storing data into state
     const handleDataChange = (e) => {
@@ -99,8 +100,6 @@ function Login() {
         }
         return true;
     };
-
-    const inputRef = useRef(null);
 
     //invoking login function while pressing enter key
     const handleKeyDown = (e) => {
