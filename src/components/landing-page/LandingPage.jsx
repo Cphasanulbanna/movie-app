@@ -11,9 +11,11 @@ import Header from "../header/Header";
 import Movies from "../movies/Movies";
 import Footer from "../footer/Footer";
 import Login from "../login-page/Login";
+import Signup from "../signup/Signup";
+
+//protected routes
 import PrivateRoute from "../routes/PrivateRoute";
 import ProtectedRouteAfterLogin from "../routes/ProtectedRouteAfterLogin";
-import Signup from "../signup/Signup";
 
 function LandingPage() {
     return (
@@ -32,11 +34,11 @@ function LandingPage() {
                             path="/login"
                             element={<Login />}
                         />
+                        <Route
+                            path="signup"
+                            element={<Signup />}
+                        />
                     </Route>
-                    <Route
-                        path="signup"
-                        element={<Signup />}
-                    />
                 </Routes>
                 <Footer />
             </section>
