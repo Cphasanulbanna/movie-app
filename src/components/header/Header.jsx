@@ -28,7 +28,7 @@ function Header() {
 
     //logout function
     const logout = () => {
-        localStorage.clear();
+        localStorage.removeItem("user_data");
         navigate("/login");
     };
 

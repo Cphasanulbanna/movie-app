@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 //css
 import "./login.css";
@@ -14,7 +14,9 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { FormLayout } from "../layouts/form-layout/FormLayout";
 import Input from "../reusable-form-elements/Input";
 import Button from "../reusable-form-elements/Button";
+
 function Login() {
+    const [credentials, setCredentials] = useState(null);
     //form fields state
     const [formData, setFormData] = useState({
         email: "",
@@ -26,6 +28,12 @@ function Login() {
         email: "",
         password: "",
     });
+
+    //credentials from localStorage
+    useEffect(() => {
+        const credentials = getlocalStorage("credentials");
+        setCredentials(credentials);
+    }, []);
 
     //login function
     const login = (e) => {
@@ -44,7 +52,7 @@ function Login() {
     const { whiteMode } = useMode();
 
     //userdata[token] from local storage
-    const { setlocalStorage } = useLocalStorage();
+    const { setlocalStorage, getlocalStorage } = useLocalStorage();
 
     //storing data into state
     const handleDataChange = (e) => {
@@ -70,31 +78,34 @@ function Login() {
         fields.map((field) => {
             if (formData[field] === "") {
                 errorObjCopy[field] = `${field} is required`;
-            } else {
-                errorObjCopy[field] = "";
-            }
-
-            //checking if email is valid when field is not empty
-            if (field === "email") {
-                if (
-                    formData[field] !== "" &&
-                    !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData[field])
-                ) {
-                    errorObjCopy[field] = "invalid email";
-                }
-            }
-
-            if (field === "password") {
-                if (formData[field] !== "") {
-                    if (formData[field].length < 6) {
-                        errorObjCopy[field] = "password must be atleast 6 digits";
+            } else if (formData[field]) {
+                //checking if email is valid when field is not empty
+                if (field === "email") {
+                    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData[field])) {
+                        errorObjCopy[field] = "Invalid email";
+                    } else if (formData[field] !== credentials?.email) {
+                        errorObjCopy[field] = "Incorrect email";
+                    } else {
+                        errorObjCopy[field] = "";
                     }
                 }
+
+                //checking if password is valid when field is not empty
+                if (field === "password") {
+                    if (formData[field].length < 6) {
+                        errorObjCopy[field] = "password must be atleast 6 digits";
+                    } else if (formData[field] !== credentials?.password) {
+                        errorObjCopy[field] = "Incorrect password";
+                    } else {
+                        errorObjCopy[field] = "";
+                    }
+                }
+            } else {
+                errorObjCopy[field] = "";
             }
         });
 
         setErrors(errorObjCopy);
-
         if (Object.values(errorObjCopy).some((error) => error !== "")) {
             return false;
         }

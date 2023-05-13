@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 //css
 import "./signup.css";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 function Signup() {
     //form fields state
@@ -26,6 +27,8 @@ function Signup() {
         email: "",
         password: "",
     });
+
+    const { setlocalStorage } = useLocalStorage();
 
     //storing data into state
     const handleDataChange = (e) => {
@@ -90,6 +93,7 @@ function Signup() {
         e.preventDefault();
 
         if (validateFields()) {
+            setlocalStorage("credentials", formData);
             navigate("/login", { replace: true });
             return;
         }
