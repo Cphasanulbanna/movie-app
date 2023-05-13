@@ -11,11 +11,11 @@ import Header from "../header/Header";
 import Movies from "../movies/Movies";
 import Login from "../login-page/Login";
 import Signup from "../signup/Signup";
+import ForgetPassword from "../forget-password/ForgetPassword";
 
 //protected routes
 import PrivateRoute from "../routes/PrivateRoute";
 import ProtectedRouteAfterLogin from "../routes/ProtectedRouteAfterLogin";
-import ForgetPassword from "../forget-password/ForgetPassword";
 
 function LandingPage() {
     return (

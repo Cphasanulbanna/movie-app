@@ -7,13 +7,13 @@ import Button from "../reusable-form-elements/Button";
 
 //custom hooks
 import { useMode } from "../../context/ModeContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 //packages
 import { Link, useNavigate } from "react-router-dom";
 
 //css
 import "./signup.css";
-import useLocalStorage from "../../hooks/useLocalStorage";
 
 function Signup() {
     //form fields state
