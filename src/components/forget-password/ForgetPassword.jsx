@@ -42,6 +42,7 @@ function ForgetPassword() {
         }
     };
 
+    //success message for password change
     const notify = () => toast.success("Password changed successfully");
 
     const { whiteMode } = useMode();
