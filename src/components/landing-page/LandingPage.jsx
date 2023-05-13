@@ -9,7 +9,6 @@ import { Route, Routes } from "react-router-dom";
 //components
 import Header from "../header/Header";
 import Movies from "../movies/Movies";
-import Footer from "../footer/Footer";
 import Login from "../login-page/Login";
 import Signup from "../signup/Signup";
 
@@ -45,7 +44,6 @@ function LandingPage() {
                         />
                     </Route>
                 </Routes>
-                <Footer />
             </section>
         </>
     );

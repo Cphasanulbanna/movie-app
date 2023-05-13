@@ -8,17 +8,21 @@ import SearchBar from "../search-bar/SearchBar";
 import MoviesList from "../movies-list/moviesList";
 
 //mode context
-import { ModeContext, useMode } from "../../context/ModeContext";
+import { useMode } from "../../context/ModeContext";
+import Footer from "../footer/Footer";
 
 function Movies() {
     const { whiteMode } = useMode();
     return (
-        <section className={`main-container ${whiteMode && "white-mode"}`}>
-            <section className="container">
-                <SearchBar />
-                <MoviesList />
+        <>
+            <section className={`main-container ${whiteMode && "white-mode"}`}>
+                <section className="container">
+                    <SearchBar />
+                    <MoviesList />
+                </section>
             </section>
-        </section>
+            <Footer />
+        </>
     );
 }
 

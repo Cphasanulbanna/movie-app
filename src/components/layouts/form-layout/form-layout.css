@@ -7,6 +7,8 @@
     margin-bottom: 100px;
     padding: 50px 65px;
     min-height: 550px;
+    display: flex;
+    justify-content: center;
 }
 
 .login-container.white-mode {
@@ -14,8 +16,9 @@
 }
 
 .login-container .content {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    justify-content: space-between;
 }
