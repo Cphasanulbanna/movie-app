@@ -5,6 +5,8 @@ import "./forget-password.css";
 
 //packages
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //resusable components
 import { FormLayout } from "../layouts/form-layout/FormLayout";
@@ -34,10 +36,13 @@ function ForgetPassword() {
         e.preventDefault();
 
         if (validateFields()) {
+            notify();
             setlocalStorage("credentials", formData);
             return;
         }
     };
+
+    const notify = () => toast.success("Password changed successfully");
 
     const { whiteMode } = useMode();
     const { setlocalStorage, getlocalStorage } = useLocalStorage();
@@ -144,6 +149,7 @@ function ForgetPassword() {
                     Login now.
                 </Link>
             </p>
+            <ToastContainer />
         </FormLayout>
     );
 }
